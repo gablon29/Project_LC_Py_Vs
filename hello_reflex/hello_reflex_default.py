@@ -17,7 +17,7 @@ def index() -> rx.Component:
     return rx.fragment(
         rx.color_mode_button(rx.color_mode_icon(), float="right"),
         rx.vstack(
-            rx.heading("Welcome to Gabriel!", font_size="2em"),
+            rx.heading("Welcome Gabriel a la fantasia!", font_size="2em"),
             rx.box("Get started by editing ", rx.code(filename, font_size="1em")),
             rx.link(
                 "Check out our docs!",
