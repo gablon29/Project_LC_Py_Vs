@@ -1,31 +1,39 @@
 import reflex as rx
 
 
-class State(rx.State):
-    count: int = 0
-
-    def increment(self):
-        self.count += 2
-
-    def decrement(self):
-        self.count -= 2
+def qa(question: str, answer: str) -> rx.Component:
+    return rx.box(
+        rx.box(question, text_align="right"),
+        rx.box(answer, text_align="left"),
+        margin_y="1em",
+    )
 
 
-def index():
+def chat() -> rx.Component:
+    qa_pairs = [
+        (
+            "What is Reflex?",
+            "A way to build web apps in pure Python",
+        ),
+        (
+            "What can I make with it?",
+            "Anything from a simple website to a complex web app!",
+        ),
+    ]
+    return rx.box(*[qa(question, answer) for question, answer in qa_pairs])
+
+
+def action_bar() -> rx.Component:
     return rx.hstack(
-        rx.button(
-            "Decrement",
-            color_scheme="red",
-            border_radius="1em",
-            on_click=State.decrement,
-        ),
-        rx.heading(State.count, font_size="2em"),
-        rx.button(
-            "Increment",
-            color_scheme="green",
-            border_radius="1em",
-            on_click=State.increment,
-        ),
+        rx.input(placeholder="Ask a question"),
+        rx.button("Ask"),
+    )
+
+
+def index() -> rx.Component:
+    return rx.container(
+        chat(),
+        action_bar(),
     )
 
 
